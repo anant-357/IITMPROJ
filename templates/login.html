@@ -1,0 +1,30 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='index.css') }}"
+    /> -->
+    <title>Ticket Booking Platform</title>
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST" action="home" id="login">
+        <label class="login-label">
+          <h3>Ticket Booking Platform Login</h3> </label
+        ><br />
+        <label class="login-label" for="userID"> Username : </label>
+        <input type="text" name="userID" /><br />
+        <label class="login-label" for="password"> Password : </label>
+        <input type="password" name="password" /><br />
+        <label class="login-label" for="isAdmin"> Admin </label>
+        <input type="checkbox" name="isAdmin" /><br />
+        <input type="submit" name="Login" /><br />
+        <a href="#">New User</a>
+      </form>
+    </div>
+  </body>
+</html>
