@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Ticket Booking Platform OpenAPI 3.0
+  title: Ticket Booking Platform OpenAPI 3.1
   description: |-
     
     Some useful links:
@@ -10,7 +10,7 @@ info:
     email: 21f3001737@ds.study.iitm.ac.in
   version: 1.0.0
 servers:
-  - url: https://127.0.0.1/8080
+  - url: http://127.0.0.1:8080
 tags:
   - name: venue
     description: Everything about your venues
@@ -28,7 +28,7 @@ paths:
       description: Add a new venue
       operationId: addvenue
       requestBody:
-        description: Create a new venue in the store
+        description: Create a new venue
         content:
           application/json:
             schema:
@@ -38,23 +38,31 @@ paths:
       responses:
         '200':
           description: Successful operation
+                
+        '400':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VENUES"
-                
-        '405':
-          description: Invalid input
+                title: error object
+                type: object
+                properties: 
+                  error-code:
+                    type: string
+                    example: "VC1001"
+                  error-message:
+                    type: string
+                    example: "Error"
+          description: BAD REQUEST
   
-  /api/admin/venue/{venueId}:
+  /api/admin/venue/{venueID}:
     put:
       tags:
         - venue
-      summary: Update an existing venue by Id
-      description: Update an existing venue by Id
+      summary: Update an existing venue by ID
+      description: Update an existing venue by ID
       operationId: updateVenue
       parameters:
-        - name: venueId
+        - name: venueID
           in: path
           description: ID of venue to return
           required: true
@@ -66,7 +74,12 @@ paths:
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VENUES"
+                title: name object
+                type: object
+                properties:
+                  Name:
+                    type: string
+                    example: "PVR"
                   
         required: true
       responses:
@@ -76,21 +89,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VENUES"
-                
+
         '400':
-          description: Invalid ID supplied
+          description: Name already in use
+          content:
+            application/json:
+              schema:
+                title: error object
+                type: object
+                properties: 
+                  error-code:
+                    type: string
+                    example: "VC1001"
+                  error-message:
+                    type: string
+                    example: "Error"              
         '404':
           description: Venue not found
         '405':
-          description: Validation exception
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                title: error object
+                type: object
+                properties: 
+                  error-code:
+                    type: string
+                    example: "VC1001"
+                  error-message:
+                    type: string
+                    example: "Error"
     get:
       tags:
         - venue
       summary: Find venue by ID
       description: Returns a single venue
-      operationId: getvenueById
+      operationId: getvenueByID
       parameters:
-        - name: venueId
+        - name: venueID
           in: path
           description: ID of venue to return
           required: true
@@ -104,10 +141,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VENUES"
-        '400':
-          description: Invalid ID supplied
         '404':
-          description: venue not found
+          description: Venue not found
     
     delete:
       tags:
@@ -116,7 +151,7 @@ paths:
       description: delete a venue
       operationId: deletevenue
       parameters:
-        - name: venueId
+        - name: venueID
           in: path
           description: venue id to delete
           required: true
@@ -149,15 +184,15 @@ paths:
         '405':
           description: Invalid input
   
-  /api/admin/show/{showId}:
+  /api/admin/show/{showID}:
     put:
       tags:
         - show
-      summary: Update an existing show by Id
-      description: Update an existing show by Id
+      summary: Update an existing show by ID
+      description: Update an existing show by ID
       operationId: updateShow
       parameters:
-        - name: showId
+        - name: showID
           in: path
           description: ID of show to return
           required: true
@@ -191,9 +226,9 @@ paths:
       tags:
         - show
       summary: Find purchase show by ID
-      operationId: getShowById
+      operationId: getShowByID
       parameters:
-        - name: showId
+        - name: showID
           in: path
           description: ID of show that needs to be fetched
           required: true
@@ -217,7 +252,7 @@ paths:
       summary: Delete Show by ID
       operationId: deleteShow
       parameters:
-        - name: showId
+        - name: showID
           in: path
           description: ID of show that needs to be fetched
           required: true
@@ -257,8 +292,8 @@ paths:
     put:
       tags:
         - bookings
-      summary: Update an existing booking by Id
-      description: Update an existing booking by Id
+      summary: Update an existing booking by ID
+      description: Update an existing booking by ID
       operationId: updateBooking
       parameters:
         - name: bookingID
@@ -295,7 +330,7 @@ paths:
       tags:
         - bookings
       summary: Find purchase booking by ID
-      operationId: getBookingById
+      operationId: getBookingByID
       parameters:
         - name: bookingID
           in: path
@@ -422,9 +457,3 @@ components:
       items:
         $ref: "#/components/schemas/SHOWS"
         
-          
-    
-    
-    
-    
-    
