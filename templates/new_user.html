@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="{{url_for('static', filename='favicon.ico')}}"
+      type="image/x-icon"
+    />
+    <title>Ticket Booking Platform</title>
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST" action="new_user" id="login">
+        <label class="login-label">
+          <h3>Ticket Booking Platform Login</h3> </label
+        ><br />
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+        %}<br />
+        <label class="login-label" for="userID"> Username : </label>
+        <input type="text" name="userID" value="{{inputUser}}" /><br />
+        <label class="login-label" for="password"> Password : </label>
+        <input type="password" name="password" /><br />
+        <label class="login-label" for="passwordConfirm">
+          Re-enter Password :
+        </label>
+        <input type="password" name="passwordConfirm" /><br />
+        <label class="login-label" for="isAdmin"> Admin </label>
+        <input type="checkbox" name="isAdmin" /><br />
+        <input type="submit" name="Create" /><br />
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,603 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ticket Booking Platform OpenAPI 3.0",
+    "description": "\nSome useful links:\n- [The venue Store repository](https://github.com/swagger-api/swagger-venuestore)\n- [The source API definition for the venue Store](https://github.com/swagger-api/swagger-venuestore/blob/master/src/main/resources/openapi.yaml)",
+    "contact": {
+      "email": "21f3001737@ds.study.iitm.ac.in"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://127.0.0.1/8080"
+    }
+  ],
+  "tags": [
+    {
+      "name": "venue",
+      "description": "Everything about your venues"
+    },
+    {
+      "name": "show",
+      "description": "Everything about your shows"
+    },
+    {
+      "name": "bookings",
+      "description": "Everything about your bookings"
+    }
+  ],
+  "paths": {
+    "/api/admin/venue": {
+      "post": {
+        "tags": [
+          "venue"
+        ],
+        "summary": "Add a new venue to the store",
+        "description": "Add a new venue to the store",
+        "operationId": "addvenue",
+        "requestBody": {
+          "description": "Create a new venue in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VENUES"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VENUES"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/admin/venue/{venueId}": {
+      "put": {
+        "tags": [
+          "venue"
+        ],
+        "summary": "Update an existing venue by Id",
+        "description": "Update an existing venue by Id",
+        "operationId": "updateVenue",
+        "parameters": [
+          {
+            "name": "venueId",
+            "in": "path",
+            "description": "ID of venue to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent venue in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VENUES"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VENUES"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venuez not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "venue"
+        ],
+        "summary": "Find venue by ID",
+        "description": "Returns a single venue",
+        "operationId": "getvenueById",
+        "parameters": [
+          {
+            "name": "venueId",
+            "in": "path",
+            "description": "ID of venue to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VENUES"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "venue not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "venue"
+        ],
+        "summary": "Deletes a venue",
+        "description": "delete a venue",
+        "operationId": "deletevenue",
+        "parameters": [
+          {
+            "name": "venueId",
+            "in": "path",
+            "description": "venue id to delete",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid venue value"
+          }
+        }
+      }
+    },
+    "/api/admin/show": {
+      "post": {
+        "tags": [
+          "show"
+        ],
+        "summary": "Create a new show",
+        "description": "Create a new show in a venue",
+        "operationId": "createShow",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SHOWS"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SHOWS"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/admin/show/{showId}": {
+      "put": {
+        "tags": [
+          "show"
+        ],
+        "summary": "Update an existing venue by Id",
+        "description": "Update an existing venue by Id",
+        "operationId": "updateShow",
+        "parameters": [
+          {
+            "name": "showId",
+            "in": "path",
+            "description": "ID of venue to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent venue in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SHOWS"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SHOWS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venuez not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "show"
+        ],
+        "summary": "Find purchase show by ID",
+        "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.",
+        "operationId": "getShowById",
+        "parameters": [
+          {
+            "name": "showId",
+            "in": "path",
+            "description": "ID of show that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SHOWS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Show not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "show"
+        ],
+        "summary": "Delete Show by ID",
+        "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
+        "operationId": "deleteShow",
+        "parameters": [
+          {
+            "name": "showId",
+            "in": "path",
+            "description": "ID of order that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "/api/user/booking": {
+      "post": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Create a new booking",
+        "description": "Create a new show in a venue",
+        "operationId": "createBooking",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BOOKED"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BOOKED"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/api/user/booking/{bookingID}": {
+      "put": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Update an existing venue by Id",
+        "description": "Update an existing venue by Id",
+        "operationId": "updateBooking",
+        "parameters": [
+          {
+            "name": "bookingID",
+            "in": "path",
+            "description": "ID of venue to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent venue in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SHOWS"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SHOWS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venuez not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Find purchase show by ID",
+        "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.",
+        "operationId": "getBookingById",
+        "parameters": [
+          {
+            "name": "bookingID",
+            "in": "path",
+            "description": "ID of show that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SHOWS"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "bookings"
+        ],
+        "summary": "Delete Booking by ID",
+        "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
+        "operationId": "deleteBooking",
+        "parameters": [
+          {
+            "name": "bookingID",
+            "in": "path",
+            "description": "ID of booking that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "VENUES": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "Name": {
+            "type": "string",
+            "example": "Shreya"
+          },
+          "Place": {
+            "type": "string",
+            "example": "PVR"
+          },
+          "City": {
+            "type": "string",
+            "description": "Order Status",
+            "example": "Mumbai",
+            "enum": [
+              "Bangalore",
+              "Delhi",
+              "Guwahati",
+              "Hyderabad",
+              "Kolkata",
+              "Mumbai"
+            ]
+          },
+          "Capacity": {
+            "type": "integer",
+            "format": "int32",
+            "example": 250
+          }
+        }
+      },
+      "SHOWS": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "Venue_ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 20
+          },
+          "Name": {
+            "type": "string",
+            "example": "Shreya"
+          },
+          "Rating": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "Tags": {
+            "type": "string",
+            "example": "Adventure Action"
+          },
+          "TicketPrice": {
+            "type": "integer",
+            "format": "int32",
+            "example": 250
+          },
+          "Date_Time": {
+            "type": "string",
+            "format": "date-time",
+            "example": "s"
+          }
+        }
+      },
+      "BOOKED": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "User_ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 11
+          },
+          "Show_ID": {
+            "type": "integer",
+            "format": "int64",
+            "example": 12
+          }
+        }
+      },
+      "arrayVENUES": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/VENUES"
+        }
+      },
+      "arraySHOWS": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SHOWS"
+        }
+      }
+    }
+  }
+}

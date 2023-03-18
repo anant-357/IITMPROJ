@@ -1,10 +1,15 @@
 from .database import db
+
+
 class Venues(db.Model):
     __tablename__ = "VENUES"
     ID = db.Column(db.Integer, autoincrement=True, primary_key=True)
     Name = db.Column(db.String, unique=True)
     Place = db.Column(db.String)
     Capacity = db.Column(db.Integer)
+    City = db.Column(db.Integer)
+
+
 class Shows(db.Model):
     __table__name = "SHOWS"
     ID = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -13,15 +18,33 @@ class Shows(db.Model):
     Rating = db.Column(db.Integer)
     Tags = db.Column(db.String)
     TicketPrice = db.Column(db.Integer)
+    Date_Time = db.Column(db.String)
+
+
 class Users(db.Model):
     __table__name = "USERS"
     ID = db.Column(db.Integer, autoincrement=True, primary_key=True)
     UserName = db.Column(db.String, unique=True)
     Password = db.Column(db.String)
     Admin = db.Column(db.Integer)
+
+
+    
 class Bookings(db.Model):
     __table__name = "BOOKED"
     ID = db.Column(db.Integer, autoincrement=True, primary_key=True)
     User_ID = db.Column(db.Integer, db.ForeignKey("USERS.ID"))
     Show_ID = db.Column(db.Integer, db.ForeignKey("SHOWS.ID"))
 
+
+def addUser(user):
+    db.session.add(user)
+    db.session.commit()
+
+def createVenue(venue):
+    db.session.add(venue)
+    db.session.commit()
+
+def addShow(event):
+    db.session.add(event)
+    db.session.commit()

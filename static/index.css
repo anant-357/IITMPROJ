@@ -1,53 +1,89 @@
+/* Reset CSS */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+/* Global Styles */
 body {
   font-family: Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #f8f8f8;
 }
 
-form {
+nav {
+  background-color: red;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 50px;
+  padding: 1rem;
+}
+
+nav h3 {
+  color: #fff;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  color: #fff;
+}
+
+nav ul li:not(:last-child) {
+  margin-right: 1rem;
+}
+
+section {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: flex; */
+  padding: 2rem;
+  gap: 2rem;
+}
+
+section div:first-child {
+  flex: 1;
+}
+
+section div:last-child {
+  flex: 0 0 300px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 label {
+  display: block;
+  margin-bottom: 0.5rem;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="password"] {
+input,
+select {
   width: 100%;
-  padding: 10px;
+  padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }
 
-input[type="checkbox"] {
-  margin-top: 10px;
-}
-
-button[type="submit"] {
-  background-color: #007bff;
+input[type="submit"] {
+  background-color: red;
   color: #fff;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
-button[type="submit"]:hover {
-  background-color: #0069d9;
+input[type="submit"]:hover {
+  background-color: #ff1a1a;
+}
+
+#main-block{
+  justify-content: center;
+  flex-direction: column;
 }

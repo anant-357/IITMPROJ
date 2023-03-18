@@ -1,0 +1,61 @@
+
+from flask_restful import Resource, marshal_with
+from application.database import db
+from application.models import Bookings
+from application.validate import NotFoundError, BookingCreationError
+from application.parsers import (
+    create_booking_parser,
+    update_booking_parser,
+)
+from marshal_formats import booking_output
+
+class BookingAPI(Resource):
+    @marshal_with(booking_output)
+    def get(self, bookingID):
+        booking = db.session.query(Bookings).filter(Bookings.ID == bookingID).first()
+        if booking:
+            return booking
+        else:
+            raise NotFoundError(status_code=404)
+
+    @marshal_with(booking_output)
+    def put(self, bookingID):
+        booking = db.session.query(Bookings).filter(Bookings.ID == bookingID).first()
+        if booking:
+            pass
+        else:
+            raise NotFoundError(status_code=404)
+
+        args = update_booking_parser.parse_args()
+        Seats = args.get("Seats", int)
+
+        if Seats is None:
+            raise BookingUpdationError(status_code=405, status_message="Number Of Seats is required", error_code="BU1001")
+        else:
+            booking.Seats = Seats
+            db.session.add(booking)
+            db.session.commit()
+            return booking, 200
+
+    def delete(self, bookingID):
+        booking = db.session.query(Bookings).filter(Bookings.ID == bookingID).first()
+        if booking:
+            db.session.delete(booking)
+        else:
+            raise NotFoundError(status_code=404)
+        
+    @marshal_with(booking_output)
+    def post(self):
+        args = create_booking_parser.parse_args()
+        UserID = args.get("UserID", int)
+        ShowID = args.get("ShowID", int)
+
+        if ShowID is None:
+            raise BookingCreationError(status_code=400, status_message="Name is required", error_code="VC1001")
+        elif UserID is None:
+            raise BookingCreationError(status_code=400, status_message="Place is required", error_code="VC1002")
+        else:
+            booking = Bookings(UserID = UserID, ShowID = ShowID)
+            db.session.add(booking)
+            db.session.commit()
+            return booking
