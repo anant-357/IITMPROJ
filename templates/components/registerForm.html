@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="{{url_for('static', filename='css/form.css')}}" />
+<div class="form-container">
+  <form method="POST" action="" id="login">
+    <div class="form-heading-container">
+      <h3 class="form-heading">Register</h3>
+    </div>
+    <div class="form-inputs-container">
+      <div class="form-input-container">
+        <input
+          class="form-input"
+          type="text"
+          name="userID"
+          placeholder="Username"
+        />
+      </div>
+      <div class="form-input-container">
+        <input
+          class="form-input"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="form-input-container">
+        <input
+          class="form-input"
+          type="password"
+          name="passwordConfirm"
+          placeholder="Re-enter Password"
+        />
+      </div>
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith
+      %}
+
+      <div class="form-input-container">
+        <label class="login-label" for="isAdmin"> Admin </label>
+        <input class="form-input" type="checkbox" name="isAdmin" />
+      </div>
+      <div class="form-input-container">
+        <input class="form-input" type="submit" name="Register" value="Register" />
+      </div>
+    </div>
+  </form>
+</div>

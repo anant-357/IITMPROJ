@@ -1,0 +1,25 @@
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/navbar.css')}}"
+/>
+
+<nav class="navbar">
+  <div class="navbar-brand-container">
+    <a class="navbar-brand" href="#">bakri.</a>
+  </div>
+  <div class="navbar-nav">
+    <div class="nav-link-container">
+      <a class="nav-link" href="#">Admin</a>
+    </div>
+    {% if session["username"]%}
+    <div class="nav-link-container">
+      <a class="nav-link" href="{{url_for('adminDashboard')}}"
+        >{{session["username"]}}</a
+      >
+    </div>
+    {% endif %}
+    <div class="nav-link-container">
+      <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+    </div>
+  </div>
+</nav>

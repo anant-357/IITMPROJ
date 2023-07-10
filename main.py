@@ -31,9 +31,9 @@ app, api = build_app()
 
 from application.controllers import *
 
-from application.api import UserAPI, VenueAPI
+from application.venueApi import VenueAPI
 
-api.add_resource(UserAPI, "/api/user/booking/<bookingID>", "/api/user/booking")
+# api.add_resource(UserAPI, "/api/user/booking/<bookingID>", "/api/user/booking")
 api.add_resource(
     VenueAPI,
     "/api/admin/venue",

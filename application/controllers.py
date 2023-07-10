@@ -12,7 +12,7 @@ def home():
         login = True
         user_name = session["username"]
 
-    return render_template("user.html", login=login, user_name=user_name)
+    return render_template("user/user.html", login=login, user_name=user_name)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -42,9 +42,9 @@ def login():
 
     if "badlogin" in session.keys():
         flash("Either Username or Password is wrong!")
-        return render_template("login.html")
+        return render_template("user/login.html")
     else:
-        return render_template("login.html")
+        return render_template("user/login.html")
 
 
 @app.route("/logout")
@@ -53,10 +53,10 @@ def logout():
     return redirect(url_for("home"))
 
 
-@app.route("/new_user", methods=["GET", "POST"])
-def new_user():
+@app.route("/register", methods=["GET", "POST"])
+def register():
     if request.method == "GET":
-        return render_template("new_user.html", inputUser="")
+        return render_template("user/register.html", inputUser="")
 
     elif request.method == "POST":
         user_name = request.form["userID"]
@@ -71,7 +71,7 @@ def new_user():
 
     if password != confirm:
         flash("Passwords do not match!")
-        return render_template("new_user.html", inputUser=user_name)
+        return render_template("user/register.html", inputUser=user_name)
     else:
         addUser(Users(UserName=user_name, Password=password, Admin=isAdmin))
         return redirect(url_for("login"))
@@ -97,14 +97,13 @@ def addEvent():
             pass
         else:
             venues = Venues.query.all()
-            return render_template("eventForm.html", venues=venues)
+            return render_template("admin/eventForm.html", venues=venues)
     else:
         return redirect(url_for("login"))
 
 
 @app.route("/admin/addVenue", methods=["GET", "POST"])
 def addVenue():
-
     if "username" in session.keys() and session["admin"]:
         if request.method == "POST":
             venueName = request.form["venueName"]
@@ -117,11 +116,11 @@ def addVenue():
             print("here")
             return redirect(url_for("adminDashboard"))
         else:
-            return render_template("venueForm.html")
+            return render_template("admin/venueForm.html")
     else:
         return redirect(url_for("login"))
 
 
 @app.route("/user/<username>/Dashboard", methods=["GET", "POST"])
 def userDashboard(username):
-    return render_template("user.html")
+    return render_template("user/user.html")

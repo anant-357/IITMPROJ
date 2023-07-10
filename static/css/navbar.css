@@ -1,0 +1,38 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 20px 30px;
+}
+
+.navbar-brand {
+  font-size: 32;
+  /* font-family: "Times New Roman", Times, serif; */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar-brand-container {
+  margin: 10px;
+  padding: 2px 6px;
+}
+
+.navbar-nav {
+  font-size: 18;
+  display: flex;
+  flex-direction: row;
+  /* font-family: "Times New Roman", Times, serif; */
+  /* font-weight: bold; */
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link-container {
+  border: 1.5px solid midnightblue;
+  margin: 10px;
+  padding: 2px 4px 0px 4px;
+  height: 30px;
+  border-radius: 5px;
+}
